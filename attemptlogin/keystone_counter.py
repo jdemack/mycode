@@ -11,6 +11,9 @@ keystone_file_lines=keystone_file.readlines()
 for i in range(len(keystone_file_lines)):
     if "- - - - -] Authorization failed" in keystone_file_lines[i]:
         loginfail += 1		# increment login failure counter by 1
+        tline = keystone_file_lines[i]
+        temp, ipaddress = tline.split("from")
+        print('Failed attempt from IP', ipaddress)
     elif "-] Authorization failed" in keystone_file_lines[i]:
         loginpass += 1		# increment login success counter by 1
 print('The number of failed login attempts is ' + str(loginfail))
